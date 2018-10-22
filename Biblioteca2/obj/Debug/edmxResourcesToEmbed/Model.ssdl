@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BibliotecaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Libro">
+    <Key>
+      <PropertyRef Name="lib_id" />
+    </Key>
+    <Property Name="lib_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="lib_nombre" Type="varchar" MaxLength="50" />
+    <Property Name="lib_precio" Type="float" />
+    <Property Name="lib_isbn" Type="varchar" MaxLength="50" />
+    <Property Name="suc_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Sucursal">
+    <Key>
+      <PropertyRef Name="suc_id" />
+    </Key>
+    <Property Name="suc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="suc_nom" Type="varchar" MaxLength="50" />
+    <Property Name="suc_direc" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="suc_id">
+    <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="0..1" />
+    <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sucursal">
+        <PropertyRef Name="suc_id" />
+      </Principal>
+      <Dependent Role="Libro">
+        <PropertyRef Name="suc_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BibliotecaModelStoreContainer">
+    <EntitySet Name="Libro" EntityType="Self.Libro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sucursal" EntityType="Self.Sucursal" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="suc_id" Association="Self.suc_id">
+      <End Role="Sucursal" EntitySet="Sucursal" />
+      <End Role="Libro" EntitySet="Libro" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

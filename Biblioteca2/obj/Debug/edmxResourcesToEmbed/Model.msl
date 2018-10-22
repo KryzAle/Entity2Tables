@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BibliotecaModelStoreContainer" CdmEntityContainer="BibliotecaEntities">
+    <EntitySetMapping Name="Libro">
+      <EntityTypeMapping TypeName="BibliotecaModel.Libro">
+        <MappingFragment StoreEntitySet="Libro">
+          <ScalarProperty Name="lib_id" ColumnName="lib_id" />
+          <ScalarProperty Name="lib_nombre" ColumnName="lib_nombre" />
+          <ScalarProperty Name="lib_precio" ColumnName="lib_precio" />
+          <ScalarProperty Name="lib_isbn" ColumnName="lib_isbn" />
+          <ScalarProperty Name="suc_id" ColumnName="suc_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sucursal">
+      <EntityTypeMapping TypeName="BibliotecaModel.Sucursal">
+        <MappingFragment StoreEntitySet="Sucursal">
+          <ScalarProperty Name="suc_id" ColumnName="suc_id" />
+          <ScalarProperty Name="suc_nom" ColumnName="suc_nom" />
+          <ScalarProperty Name="suc_direc" ColumnName="suc_direc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

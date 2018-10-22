@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BibliotecaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Libro">
+    <Key>
+      <PropertyRef Name="lib_id" />
+    </Key>
+    <Property Name="lib_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="lib_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lib_precio" Type="Double" />
+    <Property Name="lib_isbn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="suc_id" Type="Int32" />
+    <NavigationProperty Name="Sucursal" Relationship="Self.suc_id" FromRole="Libro" ToRole="Sucursal" />
+  </EntityType>
+  <EntityType Name="Sucursal">
+    <Key>
+      <PropertyRef Name="suc_id" />
+    </Key>
+    <Property Name="suc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="suc_nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="suc_direc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Libro" Relationship="Self.suc_id" FromRole="Sucursal" ToRole="Libro" />
+  </EntityType>
+  <Association Name="suc_id">
+    <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="0..1" />
+    <End Role="Libro" Type="Self.Libro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sucursal">
+        <PropertyRef Name="suc_id" />
+      </Principal>
+      <Dependent Role="Libro">
+        <PropertyRef Name="suc_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BibliotecaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Libro" EntityType="Self.Libro" />
+    <EntitySet Name="Sucursal" EntityType="Self.Sucursal" />
+    <AssociationSet Name="suc_id" Association="Self.suc_id">
+      <End Role="Sucursal" EntitySet="Sucursal" />
+      <End Role="Libro" EntitySet="Libro" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
